@@ -18,13 +18,6 @@ Look over the directory structure of the project before you start
 making changes to it, and consider the various tools that we are
 using to manage our project.
 
-:question: Answer question *1* [QUESTIONS](./LABTASKS.md#questions)
-
-:question: What role is Gradle playing in the
-project, and what is the purpose of `build.gradle`?
-
-:question: What is the purpose of Travis-CI?
-
 ## Exploring the server
 
 Study the server (Java) code in the project you have cloned.
@@ -61,7 +54,7 @@ we'll just refer to this as the `public` folder.
 
 :question: Answer question *4* and *5* and *6* [QUESTIONS](./LABTASKS.md#questions)
 
-##Questions
+## Questions
 
 :question: *1* What is the purpose of `.gitignore`?
 
@@ -84,6 +77,13 @@ request is sent to the server? What is received, and how/where
 is it displayed?
 
 :question: *6* Where is the client-side JavaScript defined? Name the file(s) in which it is used.
+
+:question: Answer question *1* [QUESTIONS](./LABTASKS.md#questions)
+
+:question: What role is Gradle playing in the
+project, and what is the purpose of `build.gradle`?
+
+:question: What is the purpose of Travis-CI?
 
 ## Use ZenHub to support Agile development
 
