@@ -18,7 +18,18 @@ not have to write out an entire html file/ etc.
 There are two methods within this class: getUser and getUsers, 
 getUser checks for a specific user id within the database. If this id exists,
 a success message is displayed, if not, a fail message is displayed.
-getUsers returns the enetire list of users within the database.
+getUsers returns the entire list of users within the database.
 
 
+
+## What are the contents of the public folder? What is the purpose of each of the HTML files there?
+The public folder contains all of the code that users will interact directly with, i.e, the client.
+
+The index.html is the page the user sees when they initially navigate to the site. It includes navigation to the
+two other pages, as well as a button which triggers a simple javascript function that sends an alert to the screen.
+
+The about.html is simply an "about" page that can be navigated to from index.html
+
+The users.html page links to users.js, which actually interacts with the API. The html page links function calls
+to buttons.
 
