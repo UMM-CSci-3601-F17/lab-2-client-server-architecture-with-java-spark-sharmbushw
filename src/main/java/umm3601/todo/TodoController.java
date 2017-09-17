@@ -10,8 +10,7 @@ import java.io.IOException;
 
 import static umm3601.Util.*;
 
-public class TodoController
-{
+public class TodoController {
   private final Gson gson;
   private TodoDatabase database;
 
