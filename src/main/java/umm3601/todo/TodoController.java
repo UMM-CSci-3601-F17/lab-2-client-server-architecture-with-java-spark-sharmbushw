@@ -13,11 +13,11 @@ import static umm3601.Util.*;
 public class TodoController
 {
   private final Gson gson;
-  private Database database;
+  private TodoDatabase database;
 
 
 
-  public TodoController(Database database) {
+  public TodoController(TodoDatabase database) {
     gson = new Gson();
     this.database = database;
   }
