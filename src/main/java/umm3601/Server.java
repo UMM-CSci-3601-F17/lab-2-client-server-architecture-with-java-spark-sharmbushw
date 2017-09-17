@@ -3,7 +3,10 @@ package umm3601;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
-import umm3601.user.Database;
+import umm3601.todo.TodoDatabase;
+import umm3601.todo.TodoController;
+import umm3601.user.UserDatabase;
+import umm3601.user.User;
 import umm3601.user.UserController;
 
 import java.io.IOException;
@@ -14,12 +17,14 @@ import static spark.debug.DebugScreen.*;
 public class Server {
 
   public static final String USER_DATA_FILE = "src/main/data/users.json";
-  private static Database userDatabase;
+  private static UserDatabase userDatabase;
+  //private static
 
   public static void main(String[] args) {
 
     // Initialize dependencies
     UserController userController = buildUserController();
+    //TodoController todoController = buildTodoController();
 
     // Configure Spark
     port(4567);
@@ -69,7 +74,7 @@ public class Server {
     UserController userController = null;
 
     try {
-      userDatabase = new Database(USER_DATA_FILE);
+      userDatabase = new UserDatabase(USER_DATA_FILE);
       userController = new UserController(userDatabase);
     } catch (IOException e) {
       System.err.println("The server failed to load the user data; shutting down.");

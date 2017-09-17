@@ -15,7 +15,7 @@ import static umm3601.Util.*;
 public class UserController {
 
   private final Gson gson;
-  private Database database;
+  private UserDatabase database;
 
   /**
    * Construct a controller for users.
@@ -26,7 +26,7 @@ public class UserController {
    *
    * @param database the database containing user data
    */
-  public UserController(Database database) {
+  public UserController(UserDatabase database) {
     gson = new Gson();
     this.database = database;
   }
