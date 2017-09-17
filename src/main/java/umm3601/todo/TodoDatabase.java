@@ -39,13 +39,20 @@ public class TodoDatabase {
 
   /**
    * Get an array of all the users satisfying the queries in the params.
-   *
+   *redirect.get("/fromPath", "/toPath");
+
+// redirect a POST to "/fromPath" to "/toPath", with status 303
+redirect.post("/fromPath", "/toPath", Redirect.Status.SEE_OTHER);
+
+// redirect any request to "/fromPath" to "/toPath" with status 301
+redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
    * @param queryParams map of required key-value pairs for the query
    * @return an array of all the users matching the given criteria
    */
 
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
+
     if(queryParams.containsKey("owner")) {
       String targetOwner = queryParams.get("owner")[0];
       filteredTodos = filterTodosByOwners(filteredTodos, targetOwner);

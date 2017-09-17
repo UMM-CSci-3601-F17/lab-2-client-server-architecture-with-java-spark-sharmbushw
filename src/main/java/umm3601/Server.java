@@ -49,6 +49,7 @@ public class Server {
     get("api/users", userController::getUsers);
 
     get("api/todos/:id", todoController::getTodo);
+    get("api/todos?limit",todoController::maxTodos);
     get("api/todos", todoController::getTodos);
 
     // An example of throwing an unhandled exception so you can see how the

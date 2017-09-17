@@ -38,4 +38,18 @@ public class TodoController {
     return buildSuccessJsonResponse("todos", gson.toJsonTree(todos));
   }
 
-}
+  public JsonObject maxTodos(Request req, Response res) {
+      res.type("application/json");
+      int maxtodo = Integer.parseInt(req.queryParams("limit"));
+
+      Todo[] allTodos = database.listTodos(req.queryMap().toMap());
+      Todo[] todos = new Todo[maxtodo];
+      for(int i = 0; i < todos.length; i++){
+        todos[i] =  allTodos[i];
+      }
+      return buildSuccessJsonResponse("todos",gson.toJsonTree(todos));
+    }
+
+
+  }
+
