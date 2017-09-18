@@ -30,4 +30,28 @@ public class TodoController
     this.database = database;
   }
 
+  /**
+   * Get the single todo specified by the `id` parameter in the request.
+   *
+   * @param req the HTTP request
+   * @param res the HTTP response
+   * @return a success JSON object if the todo with that ID is found, a fail
+   * JSON object if no todo with that ID is found
+   */
+  public JsonObject getTodo(Request req, Response res)
+  {
+    res.type("application/json");
+    String id = req.params("id");
+    Todo todo = database.getTodo(id);
+    if (todo != null)
+    {
+      return buildSuccessJsonResponse("user", gson.toJsonTree(todo));
+    }
+    else
+    {
+      String message = "User with ID " + id + " wasn't found.";
+      return buildFailJsonResponse("id", message);
+    }
+  }
+
 }
