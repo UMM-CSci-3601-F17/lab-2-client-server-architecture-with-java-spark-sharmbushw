@@ -54,4 +54,17 @@ public class TodoController
     }
   }
 
+  /**
+   * Get a JSON response with a list of all the todos in the "database".
+   *
+   * @param req the HTTP request
+   * @param res the HTTP response
+   * @return a success JSON object containing all the todos
+   */
+  public JsonObject getTodos(Request req, Response res) {
+    res.type("application/json");
+    Todo[] todos = database.listTodos(req.queryMap().toMap());
+    return buildSuccessJsonResponse("users", gson.toJsonTree(todos));
+  }
+
 }

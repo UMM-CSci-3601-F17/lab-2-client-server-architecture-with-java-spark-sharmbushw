@@ -37,4 +37,22 @@ public class TodoDatabase {
     return Arrays.stream(allTodos).filter(x -> x._id.equals(id).findFirst().orElse(null));
   }
 
+  /**
+   * Get an array of all the todos satisfying the queries in the params.
+   *
+   * @param queryParams map of required key-value pairs for the query
+   * @return an array of all the todos matching the given criteria
+   */
+  public Todo[] listTodos(Map<String, String[]> queryParams) {
+    Todo[] filteredTodos = allTodos;
+
+    // Filter age if defined
+    if(queryParams.containsKey("owner")) {
+      String targetOwner = Integer.parseInt(queryParams.get("owner")[0])
+      filteredTodos = filteredTodos(filteredTodos, x -> x.owner.equalIgnoreCase(targetOwner));
+    }
+
+
+    return filteredTodos;
+  }
 }
