@@ -78,6 +78,10 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
       String givenString = queryParams.get("contains")[0];
       filteredTodos = filterTodosByBody(filteredTodos, givenString);
     }
+    if(queryParams.containsKey("category")){
+      String targetCategory = queryParams.get("category")[0];
+      filteredTodos = filterTodosByCategory(filteredTodos, targetCategory);
+    }
     return filteredTodos;
   }
 
@@ -111,4 +115,7 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
     return Arrays.stream(todos).filter(x -> x.body.contains(contains)).toArray(Todo[]::new);
   }
 
+  public Todo[] filterTodosByCategory(Todo[] todos, String targetCategory){
+    return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
+  }
 }
