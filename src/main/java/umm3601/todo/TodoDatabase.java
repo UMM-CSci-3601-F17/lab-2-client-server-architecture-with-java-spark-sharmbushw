@@ -57,10 +57,6 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
       String targetOwner = queryParams.get("owner")[0];
       filteredTodos = filterTodosByOwners(filteredTodos, targetOwner);
     }
-    if(queryParams.containsKey("limit")) {
-      int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
-      filteredTodos = filterTodosByLimit(filteredTodos, targetLimit);
-    }
     if(queryParams.containsKey("status")) {
       String targetStatus = queryParams.get("status")[0];
 
@@ -81,6 +77,14 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
     if(queryParams.containsKey("category")){
       String targetCategory = queryParams.get("category")[0];
       filteredTodos = filterTodosByCategory(filteredTodos, targetCategory);
+    }
+    if(queryParams.containsKey("limit")) {
+      int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
+      filteredTodos = filterTodosByLimit(filteredTodos, targetLimit);
+    }
+    if(queryParams.containsKey("orderBy")){
+      String targetCategory = queryParams.get("orderBy")[0];
+      filteredTodos = sortTodosByField(filteredTodos, targetCategory);
     }
     return filteredTodos;
   }
@@ -117,5 +121,9 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
 
   public Todo[] filterTodosByCategory(Todo[] todos, String targetCategory){
     return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
+  }
+
+  public Todo[] sortTodosByField(Todo[] todos,String field){
+    return null;
   }
 }
