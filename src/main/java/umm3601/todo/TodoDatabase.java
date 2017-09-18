@@ -63,11 +63,20 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
     }
     if(queryParams.containsKey("status")) {
       String targetStatus = queryParams.get("status")[0];
-      boolean isComplete = false;
+
       if (targetStatus.equals("complete")){
-        isComplete = true;
+        boolean isComplete = true;
+        filteredTodos = filterTodosByStatus(filteredTodos, isComplete);
       }
-      filteredTodos = filterTodosByStatus(filteredTodos, isComplete);
+
+      if (targetStatus.equals("incomplete")){
+        boolean isComplete = false;
+        filteredTodos = filterTodosByStatus(filteredTodos, isComplete);
+      }
+    }
+    if(queryParams.containsKey("contains")) {
+      String givenString = queryParams.get("contains")[0];
+      filteredTodos = filterTodosByBody(filteredTodos, givenString);
     }
     return filteredTodos;
   }
@@ -96,6 +105,10 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
 
     return Arrays.stream(todos).filter(x -> x.status == todoStatus).toArray(Todo[]::new);
 
+  }
+
+  public Todo[] filterTodosByBody(Todo[] todos, String contains){
+    return Arrays.stream(todos).filter(x -> x.body.contains(contains)).toArray(Todo[]::new);
   }
 
 }
