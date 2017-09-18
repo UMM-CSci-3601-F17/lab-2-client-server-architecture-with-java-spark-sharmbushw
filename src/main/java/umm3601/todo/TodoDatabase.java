@@ -57,19 +57,31 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
       String targetOwner = queryParams.get("owner")[0];
       filteredTodos = filterTodosByOwners(filteredTodos, targetOwner);
     }
+    if(queryParams.containsKey("limit")) {
+      int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
+      filteredTodos = filterTodosByLimit(filteredTodos, targetLimit);
+    }
     return filteredTodos;
   }
 
   /**
    * Get an array of all the users having the target age.
    *
-   * @param users the list of users to filter by age
-   * @param targetAge the target age to look for
+   * @param todos the list of todos to filter by age
+   * @param targetOwner the target age to look for
    * @return an array of all the users from the given list that have
    * the target age
    */
   public Todo[] filterTodosByOwners(Todo[] todos, String targetOwner) {
     return Arrays.stream(todos).filter(x -> x.owner.equals(targetOwner)).toArray(Todo[]::new);
+  }
+
+  public Todo[] filterTodosByLimit(Todo[] todos, int targetLimit) {
+    Todo[] filteredTodos = new Todo[targetLimit];
+    for (int i=0;i<targetLimit;i++){
+      filteredTodos[i] = todos[i];
+    }
+    return filteredTodos;
   }
 
 }
