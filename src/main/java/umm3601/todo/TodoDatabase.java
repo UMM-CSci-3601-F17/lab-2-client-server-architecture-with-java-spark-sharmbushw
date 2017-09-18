@@ -61,6 +61,14 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
       int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = filterTodosByLimit(filteredTodos, targetLimit);
     }
+    if(queryParams.containsKey("status")) {
+      String targetStatus = queryParams.get("status")[0];
+      boolean isComplete = false;
+      if (targetStatus.equals("complete")){
+        isComplete = true;
+      }
+      filteredTodos = filterTodosByStatus(filteredTodos, isComplete);
+    }
     return filteredTodos;
   }
 
@@ -82,6 +90,12 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
       filteredTodos[i] = todos[i];
     }
     return filteredTodos;
+  }
+
+  public Todo[] filterTodosByStatus(Todo[] todos, boolean todoStatus){
+
+    return Arrays.stream(todos).filter(x -> x.status == todoStatus).toArray(Todo[]::new);
+
   }
 
 }
