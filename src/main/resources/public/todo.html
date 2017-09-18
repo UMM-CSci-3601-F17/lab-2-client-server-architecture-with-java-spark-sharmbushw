@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos</title>
+  <script type="text/javascript" src="javascript/todo.js"></script>
+</head>
+<body>
+
+  <button type="button" id="getAll">Get All Todos</button>
+
+  <hr/>
+
+  <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
+
+  owner: <input id="owner" type= "text" name="owner">
+  <button type="button" id="getUsersByOwner"> get users by owner </button>
+
+  <script>
+    window.onload = function() {
+      console.log("The page is loaded now!");
+
+      var element = document.getElementById('getAll');
+      element.addEventListener("click", getAllTodos, true);
+
+      element = document.getElementById('getUsersByAge');
+      element.addEventListener("click", getAllUsersByAge, true);
+    }
+  </script>
+</body>
+</html>
