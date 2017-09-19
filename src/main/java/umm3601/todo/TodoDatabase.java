@@ -50,6 +50,8 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
    * @return an array of all the users matching the given criteria
    */
 
+  // large method that gets called any time getTodos is called from the controller.
+  // This handles various query parameters, and calls their respective helper functions.
   public Todo[] listTodos(Map<String, String[]> queryParams) {
     Todo[] filteredTodos = allTodos;
 
@@ -90,17 +92,19 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
   }
 
   /**
-   * Get an array of all the users having the target age.
+   * Get an array of all the todos having the target owner.
    *
-   * @param todos the list of todos to filter by age
-   * @param targetOwner the target age to look for
-   * @return an array of all the users from the given list that have
-   * the target age
+   * @param todos the list of todos to filter by owner
+   * @param targetOwner the target owner to look for
+   * @return an array of all the todos from the given list that have
+   * the target owner
    */
   public Todo[] filterTodosByOwners(Todo[] todos, String targetOwner) {
     return Arrays.stream(todos).filter(x -> x.owner.equals(targetOwner)).toArray(Todo[]::new);
   }
 
+  // This helper function simply takes a given int from the query param and creates and
+  // returns a smaller todo array
   public Todo[] filterTodosByLimit(Todo[] todos, int targetLimit) {
     Todo[] filteredTodos = new Todo[targetLimit];
     for (int i=0;i<targetLimit;i++){
@@ -108,22 +112,50 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
     }
     return filteredTodos;
   }
-
+  /**
+   * Get an array of all the todos having the target owner.
+   *
+   * @param todos the list of todos to filter by status
+   * @param todoStatus the target status to look for
+   * @return an array of all the todos from the given list that have
+   * the target status
+   */
   public Todo[] filterTodosByStatus(Todo[] todos, boolean todoStatus){
 
     return Arrays.stream(todos).filter(x -> x.status == todoStatus).toArray(Todo[]::new);
 
   }
 
+  /**
+   * Get an array of all the todos having the target owner.
+   *
+   * @param todos the list of todos to filter by a given string within the body
+   * @param contains the target string to look for
+   * @return an array of all the todos from the given list that have
+   * the given string
+   */
   public Todo[] filterTodosByBody(Todo[] todos, String contains){
     return Arrays.stream(todos).filter(x -> x.body.contains(contains)).toArray(Todo[]::new);
   }
-
+  /**
+   * Get an array of all the todos having the target owner.
+   *
+   * @param todos the list of todos to filter by a given category
+   * @param targetCategory the target category to look for
+   * @return an array of all the todos from the given list that have
+   * the given category
+   */
   public Todo[] filterTodosByCategory(Todo[] todos, String targetCategory){
     return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
   }
-
+  // Will sort based on field given
   public Todo[] sortTodosByField(Todo[] todos,String field){
+    Todo[] sortedTodos = new Todo[todos.length-1];
+    if(field.equals("owner")){
+      
+    }
     return null;
   }
+
+
 }
