@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
-
+import java.util.Comparator;
 /**
  * A fake "database" of user info
  *
@@ -82,13 +82,37 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
       int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredTodos = filterTodosByLimit(filteredTodos, targetLimit);
     }
-    if(queryParams.containsKey("orderBy")){
-      String targetCategory = queryParams.get("orderBy")[0];
-      filteredTodos = sortTodosByField(filteredTodos, targetCategory);
+    if (queryParams.containsKey("orderBy")) {
+      switch (queryParams.get("orderBy")[0]) {
+        case "owner":
+          filteredTodos = sortTodos(filteredTodos, Comparator.comparing(x -> x.owner));
+          break;
+        case "category":
+          filteredTodos = sortTodos(filteredTodos, Comparator.comparing(x -> x.category));
+          break;
+        case "body":
+          filteredTodos = sortTodos(filteredTodos, Comparator.comparing(x -> x.body));
+          break;
+        case "status":
+          filteredTodos = sortTodos(filteredTodos, Comparator.comparing(x -> x.status));
+          break;
+      }
     }
     return filteredTodos;
   }
 
+
+  /**
+   * Get an array of todos sorted by the given comparator
+   *
+   * @param todos the list of todos to sort
+   * @param c     the comparator to sort by
+   * @return an array of all the todos from the given list
+   * sorted by the given comparator
+   */
+  public Todo[] sortTodos(Todo[] todos, Comparator<? super Todo> c) {
+    return Arrays.stream(todos).sorted(c).toArray(Todo[]::new);
+  }
   /**
    * Get an array of all the users having the target age.
    *
@@ -123,7 +147,4 @@ redirect.any("/fromPath", "/toPath", Redirect.Status.MOVED_PERMANENTLY);
     return Arrays.stream(todos).filter(x -> x.category.equals(targetCategory)).toArray(Todo[]::new);
   }
 
-  public Todo[] sortTodosByField(Todo[] todos,String field){
-    return null;
-  }
 }
