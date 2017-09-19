@@ -14,7 +14,19 @@
   <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
 
   owner: <input id="owner" type= "text" name="owner">
-  <button type="button" id="getUsersByOwner"> get users by owner </button>
+  <button type="button" id="getTodosByOwner"> get users by owner </button>
+  <p></p>
+  status: <input id="status" type= "text" name="status">
+  <button type="button" id="getTodosByStatus"> get users by status </button>
+
+  <p></p>
+
+  contains: <input id="body" type= "text" name="body">
+  <button type="button" id="getTodosByBody"> Search todo bodies for String contained</button>
+
+  <p></p>
+  category: <input id="category" type= "text" name="category">
+  <button type="button" id="getTodosByCategory"> Search todo bodies for String contained</button>
 
   <script>
     window.onload = function() {
@@ -23,8 +35,17 @@
       var element = document.getElementById('getAll');
       element.addEventListener("click", getAllTodos, true);
 
-      element = document.getElementById('getUsersByAge');
-      element.addEventListener("click", getAllUsersByAge, true);
+      element = document.getElementById('getTodosByOwner');
+      element.addEventListener("click", getAllTodosByOwner, true);
+
+      element = document.getElementById('getTodosByStatus');
+      element.addEventListener("click", getAllTodosByStatus, true);
+
+      element = document.getElementById('getTodosByBody');
+      element.addEventListener("click", getAllTodosByBody, true);
+
+      element = document.getElementById('getTodosByCategory');
+      element.addEventListener("click", getAllTodosByCategory, true);
     }
   </script>
 </body>

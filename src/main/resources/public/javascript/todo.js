@@ -20,7 +20,24 @@ function getAllTodosByOwner() {
 
 function getAllTodosByStatus() {
   console.log("Getting the todos.");
-  HttpThingy.get("/api/todos?owner=" +  document.getElementById("owner").value, function(returned_json) {
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?status=" +  document.getElementById("status").value, function(returned_json) {
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+function getAllTodosByBody() {
+  console.log("Getting the todos.");
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?contains=" +  document.getElementById("body").value, function(returned_json) {
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+function getAllTodosByCategory() {
+  console.log("Getting the todos.");
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todos?category=" +  document.getElementById("category").value, function(returned_json) {
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
 }
