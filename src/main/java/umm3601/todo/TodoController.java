@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import spark.Request;
 import spark.Response;
 import static umm3601.Util.*;
+import java.io.IOException;
 /**
  * Controller that manages requests for info about todos.
  */
@@ -26,7 +27,7 @@ public class TodoController
 
   public TodoController(TodoDatabase database)
   {
-    gson = new GSON();
+    gson = new Gson();
     this.database = database;
   }
 
