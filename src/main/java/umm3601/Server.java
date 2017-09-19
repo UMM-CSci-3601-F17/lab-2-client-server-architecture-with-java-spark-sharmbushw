@@ -7,6 +7,7 @@ import umm3601.todo.TodoDatabase;
 import umm3601.todo.TodoController;
 import umm3601.user.UserDatabase;
 import umm3601.user.User;
+
 import umm3601.user.UserController;
 
 import java.io.IOException;
@@ -17,15 +18,19 @@ import static spark.debug.DebugScreen.*;
 public class Server {
 
   public static final String USER_DATA_FILE = "src/main/data/users.json";
+
   private static UserDatabase userDatabase;
   public static final String TODO_DATA_FILE = "src/main/data/todos.json";
   private static TodoDatabase todoDatabase;
-  //private static
+  
+
 
   public static void main(String[] args) {
 
     // Initialize dependencies
     UserController userController = buildUserController();
+    TodoController todoController = buildTodoController();
+
     TodoController todoController = buildTodoController();
 
     // Configure Spark
@@ -40,7 +45,9 @@ public class Server {
     // Redirects to create simpler URLs
     redirect.get("/about", "/about.html");
     redirect.get("/users", "/users.html");
+
     redirect.get("/todo", "/todo.html");
+
     // API endpoints
 
     // Get specific user
@@ -48,7 +55,12 @@ public class Server {
     // List users, filtered using query parameters
     get("api/users", userController::getUsers);
 
+
+    // Get specific todos
     get("api/todos/:id", todoController::getTodo);
+    // List todos, filtered using request parameter
+
+
     get("api/todos", todoController::getTodos);
 
     // An example of throwing an unhandled exception so you can see how the
@@ -79,7 +91,9 @@ public class Server {
     UserController userController = null;
 
     try {
+
       userDatabase = new UserDatabase(USER_DATA_FILE);
+
       userController = new UserController(userDatabase);
     } catch (IOException e) {
       System.err.println("The server failed to load the user data; shutting down.");
@@ -97,6 +111,7 @@ public class Server {
     TodoController todoController = null;
 
     try {
+
       todoDatabase = new TodoDatabase(TODO_DATA_FILE);
       todoController = new TodoController(todoDatabase);
     } catch (IOException e) {
