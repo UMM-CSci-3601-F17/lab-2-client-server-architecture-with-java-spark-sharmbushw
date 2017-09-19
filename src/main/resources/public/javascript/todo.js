@@ -11,11 +11,18 @@ function getAllTodos() {
 
 function getAllTodosByOwner() {
   console.log("Getting the todos.");
-
   var HttpThingy = new HttpClient();
-  HttpThingy.get("/api/todos?owner=" +  document.getElementById("owner").value, function(returned_json){
-    document.getElementById('jsonDump').innerHTML = returned_json;
-  });
+  if(document.getElementById("limit").value==""){
+    HttpThingy.get("/api/todos?owner=" +  document.getElementById("owner").value, function(returned_json){
+      document.getElementById('jsonDump').innerHTML = returned_json;
+    });
+  }
+  else {
+    console.log("There's a number here somewhere")
+    HttpThingy.get("api/todos?owner=" + document.getElementById("owner").value + "&limit=" + document.getElementById("limit").value, function (returned_json) {
+      document.getElementById('jsonDump').innerHTML = returned_json;
+    });
+  }
 }
 
 function getAllTodosByStatus() {
@@ -40,7 +47,9 @@ function getAllTodosByCategory() {
   HttpThingy.get("/api/todos?category=" +  document.getElementById("category").value, function(returned_json) {
     document.getElementById('jsonDump').innerHTML = returned_json;
   });
-}function limitTodos() {
+}
+
+function limitTodos() {
   console.log("Limiting todos.");
   var HttpThingy = new HttpClient();
   HttpThingy.get("/api/todos?limit=" + document.getElementById("limit").value, function(returned_json) {

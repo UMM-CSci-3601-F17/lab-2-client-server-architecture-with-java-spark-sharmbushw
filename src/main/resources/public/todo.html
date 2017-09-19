@@ -13,11 +13,11 @@
 
   <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
 
-  owner: <input id="owner" type= "text" name="owner">
-  <button type="button" id="getTodosByOwner"> get users by owner </button>
+  owner: <input id="owner" type= "text" name="owner"> limit results: <input id="limit" type="text" name="limit">
+  <button type="button" id="getTodosByOwner"> get todos by owner </button>
   <p></p>
   status: <input id="status" type= "text" name="status">
-  <button type="button" id="getTodosByStatus"> get users by status </button>
+  <button type="button" id="getTodosByStatus"> get todos by status </button>
 
   <p></p>
 
@@ -26,7 +26,7 @@
 
   <p></p>
   category: <input id="category" type= "text" name="category">
-  <button type="button" id="getTodosByCategory"> Search todo bodies for String contained</button>
+  <button type="button" id="getTodosByCategory"> Search todos by category</button>
 
   <script>
     window.onload = function() {
